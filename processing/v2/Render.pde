@@ -7,9 +7,10 @@
 
 // render the character only
 void render_character() {
-  noStroke();
-  fill(100);
-  ellipse(width/4, height - 100/2 - R_Y, 100, 100);
+  image(FINCH, width/4, height - 100 - R_Y, 100, 100);
+  //noStroke();
+  //fill(100);
+  //ellipse(width/4, height - 100/2 - R_Y, 100, 100);
   //rect(width/4, height - 100 - R_Y, 100, 100);
 }
 
@@ -58,7 +59,7 @@ void render_layer_0(float position) {
 }
 
 
-// pillars
+// pillars, monsters
 void render_layer_1(float position) {
   position = mod(position, width);
   float [] xs = {position, position - width};
@@ -73,17 +74,22 @@ void render_layer_1(float position) {
     pushMatrix();
       translate(x, 0, 0);
       
-      rect(0        , 2*height/3 , width/10, height);
-      rect(width/5  , 1*height/3 , width/10, height);
-      rect(2*width/5, 7*height/10, width/10, height);
-      rect(3*width/5, 1*height/4 , width/10, height);
-      rect(4*width/5, 7*height/18, width/10, height);
+      // pillars
+      rect(0        , 2*height/3 , width/10, height, 20);
+      rect(width/5  , 1*height/3 , width/10, height, 20);
+      rect(2*width/5, 7*height/10, width/10, height, 20);
+      rect(3*width/5, 1*height/4 , width/10, height, 20);
+      rect(4*width/5, 7*height/18, width/10, height, 20);
+      
+      // monsters
+      image(DRAGON, 4*width/5, height/3, 400, 300);
+      image(GOD, 2*width/5 - 50, 3*height/7 - 30, 200, 300);
     popMatrix();
   }
 }
 
 
-// floor, grass, bush 
+// floor, bush
 void render_layer_2(float position) {
   position = mod(position, width);
   float [] xs = {position, position - width};
@@ -98,12 +104,12 @@ void render_layer_2(float position) {
       translate(x, 0, 0);
       
       // the floor
-      fill(189, 102, 187);
+      fill(163, 104, 8);
       rect(0, height - FLOOR_Y, width, FLOOR_Y);
       
       // a bush
       fill(117, 127, 25);
-      rect(7*width/8, height - FLOOR_Y - 80, 102, 80); 
+      rect(7*width/8, height - FLOOR_Y - 80, 102, 80, 20, 20, 0, 0); 
     popMatrix();
   }
 }

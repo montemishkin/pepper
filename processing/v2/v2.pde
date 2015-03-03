@@ -66,6 +66,13 @@ PVector[] STAR_POSITIONS = new PVector[100];
 // global time step
 float DT = 0.3;
 
+// the finch image
+PImage FINCH;
+// the dragon image
+PImage DRAGON;
+// the god image
+PImage GOD;
+
 
 void setup() {
   // size the window to full screen, P3D renderer is just faster
@@ -82,6 +89,11 @@ void setup() {
     // set light buffer to HIGH so that you can see
     LIGHT.set_all(1023);
   }
+  
+  // load all images
+  FINCH = loadImage("finch3d.png");//loadImage("finch.jpg");
+  DRAGON = loadImage("dragon2.png");
+  GOD = loadImage("god2.png");
   
   CAMERA_EYE = new PVector(width/2.0, height/2.0, (height/2.0) / tan(PI*30.0 / 180.0));
   CAMERA_CENTER = new PVector(width/2.0, height/2.0, 0);
