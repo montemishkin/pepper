@@ -3,14 +3,26 @@
  */
 
 
+// handle serial controls
+void handle_controls() {
+  PVector in = PVector.mult(PVector.sub(EULER, INIT_EULER), -1);
+  // positive in.y means front tilted up?
+  // positive in.z means left tilted down?
+  
+  iterate_layers(-in.z / 100);
+  
+  if (BTN_R) {  // trigger a jump
+    trigger_jump();
+  }
+  if (BTN_L) {
+  }
+}
+
+
 // handle keyboard controls
 void handle_keys() {
   if (UP_DOWN) {  // trigger a jump
-    if (!JUMPING) {
-      V_Y = 50;
-      
-      JUMPING = true;
-    }
+    trigger_jump();
   }
   if (DOWN_DOWN) {
   }
@@ -19,6 +31,16 @@ void handle_keys() {
   }
   if (RIGHT_DOWN) {
     iterate_layers(-1);
+  }
+}
+
+
+// trigger a jump to begin
+void trigger_jump() {
+  if (!JUMPING) {
+    V_Y = 50;
+    
+    JUMPING = true;
   }
 }
 
