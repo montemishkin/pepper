@@ -1,3 +1,7 @@
+/* Notes:
+ *
+ */
+
 
 // the right kind of modulo
 int mod(float n, float m) {

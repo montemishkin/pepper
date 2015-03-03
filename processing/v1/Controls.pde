@@ -1,21 +1,16 @@
-
-
-float speed = 3;
-boolean jumping = false;
-
-
-void trigger_jump() {
-  if (!jumping) {
-    v_y = 50;
-    
-    jumping = true;
-  }
-}
+/* Notes:
+ *
+ */
 
 
 // handle keyboard controls
 void handle_keys() {
-  if (UP_DOWN) {
+  if (UP_DOWN) {  // trigger a jump
+    if (!JUMPING) {
+      V_Y = 50;
+      
+      JUMPING = true;
+    }
   }
   if (DOWN_DOWN) {
   }
@@ -28,6 +23,11 @@ void handle_keys() {
 }
 
 
+//------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------
+
+
+// keyboard state variables
 boolean UP_DOWN = false;
 boolean DOWN_DOWN = false;
 boolean LEFT_DOWN = false;
@@ -37,10 +37,8 @@ boolean RIGHT_DOWN = false;
 // update keyboard state
 void keyPressed() {
   if (key == CODED) {
-    if (keyCode == UP) {
+    if (keyCode == UP)
       UP_DOWN = true;
-      trigger_jump();
-    }
     else if (keyCode == DOWN)
       DOWN_DOWN = true;
     else if (keyCode == LEFT)
