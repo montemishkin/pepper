@@ -7,11 +7,10 @@
 
 // render the character only
 void render_character() {
-  image(FINCH, width/4, height - 100 - R_Y, 100, 100);
-  //noStroke();
-  //fill(100);
-  //ellipse(width/4, height - 100/2 - R_Y, 100, 100);
-  //rect(width/4, height - 100 - R_Y, 100, 100);
+  if (R_Y > FLOOR_Y)
+    image(FLY_FINCH, width/4, height - 130 - R_Y, 130, 130);
+  else
+    image(FINCH, width/4, height - 100 - R_Y, 100, 100);
 }
 
 
@@ -20,6 +19,8 @@ void render_bg_layers() {
     render_layer_0(LAYER_POSITIONS[0]);
     render_layer_1(LAYER_POSITIONS[1]);
     render_layer_2(LAYER_POSITIONS[2]);
+    render_layer_3(LAYER_POSITIONS[3]);
+    render_layer_4(LAYER_POSITIONS[4]);
 }
 
 
@@ -59,7 +60,7 @@ void render_layer_0(float position) {
 }
 
 
-// pillars, monsters
+// pillars
 void render_layer_1(float position) {
   position = mod(position, width);
   float [] xs = {position, position - width};
@@ -74,23 +75,60 @@ void render_layer_1(float position) {
     pushMatrix();
       translate(x, 0, 0);
       
-      // pillars
       rect(0        , 2*height/3 , width/10, height, 20);
       rect(width/5  , 1*height/3 , width/10, height, 20);
       rect(2*width/5, 7*height/10, width/10, height, 20);
       rect(3*width/5, 1*height/4 , width/10, height, 20);
       rect(4*width/5, 7*height/18, width/10, height, 20);
+    popMatrix();
+  }
+}
+
+
+// dragon
+void render_layer_2(float position) {
+  position = mod(position, width);
+  float [] xs = {position, position - width};
+  float x;
+  
+  noStroke();
+  fill(253, 181, 37);
+    
+  for (int n = 0; n < xs.length; n++) {
+    x = xs[n];
+  
+    pushMatrix();
+      translate(x, 0, 0);
       
-      // monsters
-      image(DRAGON, 4*width/5, height/3, 400, 300);
-      image(GOD, 2*width/5 - 50, 3*height/7 - 30, 200, 300);
+      image(DRAGON, 4*width/5, height/5, 400, 300);
+    popMatrix();
+  }
+}
+
+
+// zombie
+void render_layer_3(float position) {
+  position = mod(position, width);
+  float [] xs = {position, position - width};
+  float x;
+  
+  noStroke();
+  fill(253, 181, 37);
+    
+  for (int n = 0; n < xs.length; n++) {
+    x = xs[n];
+  
+    pushMatrix();
+      translate(x, 0, 0);
+      
+      image(ZOMBIE, 2*width/5, height - FLOOR_Y - ZOMBIE.height + 50);
     popMatrix();
   }
 }
 
 
 // floor, bush
-void render_layer_2(float position) {
+void render_layer_4(float position) {
   position = mod(position, width);
   float [] xs = {position, position - width};
   float x;
@@ -147,8 +185,8 @@ void render_layer__1(float position) {
       endShape();
       
       // the grass
-//      fill(61, 109, 15);
-//      rect(0, height - FLOOR_Y - 20, width, 20);
+      if (!USING_SERIAL)
+        rect(0, height - FLOOR_Y - 20, width, 20);
     popMatrix();
   }
 }

@@ -15,7 +15,9 @@ void handle_controls() {
     trigger_jump();
   }
   if (BTN_L) {
-  }
+    JUMPING = false;
+  } else
+    JUMPING = true;
 }
 
 
@@ -61,8 +63,10 @@ void keyPressed() {
   if (key == CODED) {
     if (keyCode == UP)
       UP_DOWN = true;
-    else if (keyCode == DOWN)
+    else if (keyCode == DOWN) {
       DOWN_DOWN = true;
+      JUMPING = false;
+    }
     else if (keyCode == LEFT)
       LEFT_DOWN = true;
     else if (keyCode == RIGHT)
@@ -76,8 +80,10 @@ void keyReleased() {
   if (key == CODED) {
     if (keyCode == UP)
       UP_DOWN = false;
-    else if (keyCode == DOWN)
+    else if (keyCode == DOWN) {
       DOWN_DOWN = false;
+      JUMPING = true;
+    }
     else if (keyCode == LEFT)
       LEFT_DOWN = false;
     else if (keyCode == RIGHT)

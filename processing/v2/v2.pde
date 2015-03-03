@@ -45,9 +45,9 @@ float SPOT_LIGHT_ANGLE = PI / 4;
 float SPOT_LIGHT_CONCENTRATION = 1;
 
 // the horizontal positions (in pixels) of the layers
-float[] LAYER_POSITIONS = new float[3];
+float[] LAYER_POSITIONS = new float[5];
 // the horizontal speeds (in pixels) of the layers
-float[] LAYER_SPEEDS = {1, 7, 13};
+float[] LAYER_SPEEDS = {1, 7, 8, 10, 13};
 
 // is the character executing a jump?
 boolean JUMPING = false;
@@ -68,10 +68,12 @@ float DT = 0.3;
 
 // the finch image
 PImage FINCH;
+// the flying finch image
+PImage FLY_FINCH;
 // the dragon image
 PImage DRAGON;
-// the god image
-PImage GOD;
+// the ZOMBIE image
+PImage ZOMBIE;
 
 
 void setup() {
@@ -85,15 +87,16 @@ void setup() {
     PORT.bufferUntil('\n');
     // send character to arduino to indicate ready
     PORT.write('r');
-  } else {
-    // set light buffer to HIGH so that you can see
-    LIGHT.set_all(1023);
   }
   
+  // set light buffer to HIGH so that you can see
+  LIGHT.set_all(1023);
+  
   // load all images
-  FINCH = loadImage("finch3d.png");//loadImage("finch.jpg");
+  FINCH = loadImage("finch3d.png");
+  FLY_FINCH = loadImage("fly_finch.png");
   DRAGON = loadImage("dragon2.png");
-  GOD = loadImage("god2.png");
+  ZOMBIE = loadImage("god2.png");
   
   CAMERA_EYE = new PVector(width/2.0, height/2.0, (height/2.0) / tan(PI*30.0 / 180.0));
   CAMERA_CENTER = new PVector(width/2.0, height/2.0, 0);
