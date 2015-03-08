@@ -45,9 +45,9 @@ float SPOT_LIGHT_ANGLE = PI / 4;
 float SPOT_LIGHT_CONCENTRATION = 1;
 
 // the horizontal positions (in pixels) of the layers
-float[] LAYER_POSITIONS = new float[5];
+float[] LAYER_POSITIONS = new float[6];
 // the horizontal speeds (in pixels) of the layers
-float[] LAYER_SPEEDS = {1, 7, 8, 10, 13};
+float[] LAYER_SPEEDS = {1, 7, 8, 9, 10, 13};
 
 // is the character executing a jump?
 boolean JUMPING = false;

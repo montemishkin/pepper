@@ -21,6 +21,7 @@ void render_bg_layers() {
     render_layer_2(LAYER_POSITIONS[2]);
     render_layer_3(LAYER_POSITIONS[3]);
     render_layer_4(LAYER_POSITIONS[4]);
+    render_layer_5(LAYER_POSITIONS[5]);
 }
 
 
@@ -106,8 +107,31 @@ void render_layer_2(float position) {
 }
 
 
-// zombie
+      
+// bushes
 void render_layer_3(float position) {
+  position = mod(position, width);
+  float [] xs = {position, position - width};
+  float x;
+  
+  noStroke();
+  fill(117, 127, 25);
+    
+  for (int n = 0; n < xs.length; n++) {
+    x = xs[n];
+  
+    pushMatrix();
+      translate(x, 0, 0);
+      
+      rect(7*width/8, height - FLOOR_Y - 80, 102, 80, 20, 20, 0, 0); 
+      rect(100, height - FLOOR_Y - 120, 360, 200, 20, 20, 0, 0);
+      rect(width * 4 / 9, height - FLOOR_Y - 300, 300, 300, 20, 20, 0, 0);
+    popMatrix();
+  }
+}
+
+// zombie
+void render_layer_4(float position) {
   position = mod(position, width);
   float [] xs = {position, position - width};
   float x;
@@ -127,8 +151,8 @@ void render_layer_3(float position) {
 }
 
 
-// floor, bush
-void render_layer_4(float position) {
+// floor
+void render_layer_5(float position) {
   position = mod(position, width);
   float [] xs = {position, position - width};
   float x;
@@ -144,10 +168,6 @@ void render_layer_4(float position) {
       // the floor
       fill(163, 104, 8);
       rect(0, height - FLOOR_Y, width, FLOOR_Y);
-      
-      // a bush
-      fill(117, 127, 25);
-      rect(7*width/8, height - FLOOR_Y - 80, 102, 80, 20, 20, 0, 0); 
     popMatrix();
   }
 }
