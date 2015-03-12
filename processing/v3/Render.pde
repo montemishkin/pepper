@@ -5,6 +5,16 @@
  */
 
 
+// log console message to screen
+void render_console() {
+  background(20, 20, 200);
+  fill(255);
+  image(FINCH, width - 100, 0, 100, 100);
+  text("Looking for a lovebird?\nFind finches near you.", width - 310, 40);
+  text(CONSOLE, 20, height - (30 * split(CONSOLE, '\n').length));
+}
+
+
 // render the character only
 void render_character() {
   if (R_Y > FLOOR_Y)
@@ -50,8 +60,8 @@ void render_layer_0(float position) {
       ellipse(9*width/10, height/5, 100, 100);
       
       // stars
-      for (int i = 0; i < NUM_STARS; i++) {
-        p = STAR_POSITIONS[i];
+      for (int i = 0; i < N_STARS; i++) {
+        p = STARS[i];
         fill(255, map(LIGHT.get_last(), 0, 700, 255, 0));
         rect(p.x, p.y, 10, 10);
       }
@@ -193,7 +203,7 @@ void render_layer__1(float position) {
     pushMatrix();
       translate(x, 0, 0);
       
-      // the grass                            // annoyingly "moves" in time
+      // the grass
       fill(61, 109, 15);
       beginShape();
         for (int i = SOUND.get_size() - 1; i >= 0; i--) {
@@ -203,10 +213,6 @@ void render_layer__1(float position) {
         vertex(-x, height - FLOOR_Y);
         vertex(width - x, height - FLOOR_Y);
       endShape();
-      
-      // the grass
-      if (!USING_SERIAL)
-        rect(0, height - FLOOR_Y - 20, width, 20);
     popMatrix();
   }
 }
